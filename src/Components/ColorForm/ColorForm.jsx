@@ -21,7 +21,7 @@ export default function ColorForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <ColorInput/>
+      <ColorInput />
       <button type="submit" className="form__button">
         Add Color
       </button>
