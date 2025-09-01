@@ -8,7 +8,7 @@ function App() {
     <>
       <h1>Theme Creator</h1>
 
-      {/* <ColorForm/> */}
+      <ColorForm />
 
       {initialColors.map((color) => {
         return <Color key={color.id} color={color} />;
