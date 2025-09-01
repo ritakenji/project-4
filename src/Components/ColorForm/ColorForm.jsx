@@ -10,3 +10,21 @@
 - Use a package to generate unique id's like nanoid or ui
 - Develop a ColorInput component to handle synchronized text and color inputs, ensuring that they reflect the same value. ( Controlled Inputs )
 */
+
+export default function ColorForm() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log("Here's data: ", data);
+  }
+
+  return (
+    <form className="form" onSubmit={handleSubmit}>
+      <ColorInput/>
+      <button type="submit" className="form__button">
+        Add Color
+      </button>
+    </form>
+  );
+}
