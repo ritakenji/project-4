@@ -2,7 +2,6 @@ import "./Color.css";
 
 //Set up a React component for displaying a single color card:
 export default function Color({ color }) {
-  console.log("Find Issue 1");
   return (
     <div
       className="color-card"
