@@ -1,8 +1,8 @@
 import "./ColorForm.css";
 import { useState } from "react";
 
-export function ColorInput({ name }) {
-  const [inputValue, setInputValue] = useState("");
+export function ColorInput({ name, defaultColor }) {
+  const [inputValue, setInputValue] = useState(defaultColor);
 
   function handleChange(event) {
     //an event where something changes
@@ -14,10 +14,15 @@ export function ColorInput({ name }) {
         type="text"
         id={name}
         name={name}
-        placeholder="#0000"
         defaultValue={inputValue}
+        placeholder={defaultColor}
       />
-      <input type="color" name={name} placeholder="" onChange={handleChange} />
+      <input
+        type="color"
+        name={name}
+        onChange={handleChange}
+        defaultValue={defaultColor}
+      />
       {/* where the change happens ^^^ */}
     </div>
   );
