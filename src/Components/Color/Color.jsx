@@ -32,13 +32,15 @@ export default function Color({ color, id, onDeleteColor }) {
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      <button type="button" onClick={handleDeleteConfirm}>
-        Delete
-      </button>
+      {!isShown && (
+        <button type="button" onClick={handleDeleteConfirm}>
+          Delete
+        </button>
+      )}
 
       {isShown && (
         <>
-          <p className="delete-message">Really delete?</p>
+          <p className="color-card-highlight">Really delete?</p>
           <button
             type="button"
             className="cancel-button"

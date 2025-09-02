@@ -12,6 +12,7 @@ export function ColorInput({ name }) {
     <div className="color-inputs">
       <input
         type="text"
+        id={name}
         name={name}
         placeholder="#0000"
         defaultValue={inputValue}
