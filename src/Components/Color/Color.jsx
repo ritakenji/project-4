@@ -1,7 +1,9 @@
 import { useState } from "react";
+import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
-export default function Color({ color, id, onDeleteColor, onEditColor }) {
+export default function Color({ color, id, onDeleteColor }) {
   const [isShown, setIsShown] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   function handleDeleteConfirm() {
     setIsShown(true);
@@ -18,13 +20,17 @@ export default function Color({ color, id, onDeleteColor, onEditColor }) {
       <h3 className="color-card-highlight">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      {isEditing && <ColorForm />}
 
       {!isShown && (
         <>
-        <button type="button" onClick={handleDeleteConfirm}>
-          Delete
-        </button>
-        <button type="button" onClick={() => onEditColor}>Edit</button>
+          <button type="button" onClick={handleDeleteConfirm}>
+            Delete
+          </button>
+
+          <button type="button" onClick={() => setIsEditing(true)}>
+            Edit
+          </button>
         </>
       )}
 
