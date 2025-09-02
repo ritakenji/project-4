@@ -24,9 +24,7 @@ export default function ColorForm({ onAddColor }) {
         <ColorInput name="contrastText" />
       </label>
 
-      <button type="submit" className="form-button">
-        Add Color
-      </button>
+      <button type="submit">Add Color</button>
     </form>
   );
 }

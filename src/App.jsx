@@ -7,6 +7,7 @@ import { uid } from "uid";
 
 function App() {
   const [colors, setColors] = useState(initialColors);
+  console.log("my colors: ", colors.length);
 
   function handleAddColor(newColor) {
     setColors([{ id: uid(), ...newColor }, ...colors]);
@@ -33,6 +34,13 @@ function App() {
           />
         );
       })}
+      {colors.length === 0 ? (
+        <p className="add-color-message">
+          No more themes available. Please add more !
+        </p>
+      ) : (
+        ""
+      )}
     </>
   );
 }
