@@ -15,7 +15,7 @@ export default function Color({ color, id, onDeleteColor }) {
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{color.hex}</h3>
+      <h3 className="color-card-highlight">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
@@ -41,14 +41,20 @@ export default function Color({ color, id, onDeleteColor }) {
 }
 
 /* 
-What must happen: 
-I click the delete button ---> 1 <p> w message + cancel button pop up  AND  delete button moved to to right 
-
-How I get there:
-- 1st button onclick triggers onConfirmDelete
-- onConfirmDelete --> show 3 elements: 
-                              - message ---> <p className="delete-message">Really delete?</p>
-                              - cancel button ---> <button type="button" className="cancel-button" onClick={() =>}>Cancel</button>
-                              - delete button ---> <button type="button" onClick={() => onDeleteColor(id)}>
--
+What happens:
+- click on edit button:
+                    > other buttons disappear
+                    > new form shows up role, hex, contrast color inputs + 'update color' button
+- click on update button:
+                    > info is saved and reflected in the theme
 */
+
+/* 
+****** Acceptance Criteria
+- Each color card has an "Edit" button.
+- Clicking the "Edit" button allows me to modify the role, hex value, and contrast text via a form.
+- The updated color information is reflected in the theme upon submission.
+
+****** Tasks
+- Introduce a state for the edit
+- Reuse the ColorForm Component and display it within the Color Component when in edit mode */
