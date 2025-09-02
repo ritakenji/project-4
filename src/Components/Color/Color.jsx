@@ -5,7 +5,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   const [mode, setMode] = useState("view");
 
   const handleUpdate = (updatedColor) => {
-    onUpdateColor(id, updatedColor);
+    onUpdateColor(id, updatedColor); //in theory i understand im almost there, in practice i feel so far away
     setMode("view");
   };
 
@@ -26,7 +26,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
           case "edit":
             return (
               <>
-                <ColorForm onSubmit={handleUpdate} initialData={color} />
+                <ColorForm onSubmit={handleUpdate} />
                 <button
                   type="button"
                   onClick={() => (onUpdateColor(id), setMode("view"))}
