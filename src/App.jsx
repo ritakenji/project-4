@@ -7,9 +7,15 @@ import { uid } from "uid";
 
 function App() {
   const [colors, setColors] = useState(initialColors);
+  console.log("my colors: ", colors.length);
 
   function handleAddColor(newColor) {
     setColors([{ id: uid(), ...newColor }, ...colors]);
+  }
+
+  function handleDeleteColor(deleteId) {
+    /* console.log("Deleted Id here: ", deleteId); */
+    setColors(colors.filter((color) => color.id != deleteId));
   }
 
   return (
@@ -19,8 +25,22 @@ function App() {
       <ColorForm onAddColor={handleAddColor} />
 
       {colors.map((color) => {
-        return <Color key={color.id} color={color} />;
+        return (
+          <Color
+            key={color.id}
+            id={color.id}
+            color={color}
+            onDeleteColor={handleDeleteColor}
+          />
+        );
       })}
+      {colors.length === 0 ? (
+        <p className="add-color-message">
+          No more themes available. Please add more !
+        </p>
+      ) : (
+        ""
+      )}
     </>
   );
 }

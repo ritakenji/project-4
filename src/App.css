@@ -2,3 +2,10 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
+.add-color-message {
+  text-align: center;
+  font-size: large;
+  font-weight: 700;
+  background-color: #ff4a11;
+  color:white;
+}
