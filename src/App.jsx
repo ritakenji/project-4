@@ -12,8 +12,14 @@ function App() {
     setColors([{ id: uid(), ...newColor }, ...colors]);
   }
 
-  function handleDeleteColor(deleteId) {
-    setColors(colors.filter((color) => color.id != deleteId));
+  function handleDeleteColor(deletedId) {
+    setColors(colors.filter((color) => color.id != deletedId));
+    console.log("deleteId is: ", deletedId);
+  }
+
+  function handleUpdateColor(updatedColor) {
+    setColors(colors.filter((color) => color.id != updatedColor));
+    console.log("updatedColor is: ", updatedColor); //<-- problem hint: this is only happening on submit
   }
 
   return (
@@ -29,6 +35,7 @@ function App() {
             id={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onUpdateColor={handleUpdateColor}
           />
         );
       })}

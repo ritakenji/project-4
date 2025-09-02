@@ -1,13 +1,13 @@
 import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
-export default function Color({ color, id, onDeleteColor }) {
-  const [isShown, setIsShown] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
+  const [mode, setMode] = useState("view");
 
-  function handleDeleteConfirm() {
-    setIsShown(true);
-  }
+  const handleUpdate = (updatedColor) => {
+    onUpdateColor(id, updatedColor);
+    setMode("view");
+  };
 
   return (
     <div
@@ -20,66 +20,47 @@ export default function Color({ color, id, onDeleteColor }) {
       <h3 className="color-card-highlight">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
-      {isEditing && <ColorForm />}
 
-      {!isShown && (
-        <>
-          <button
-            type="button"
-            className="first-delete-button"
-            onClick={handleDeleteConfirm}
-          >
-            Delete
-          </button>
-
-          <button
-            type="button"
-            className="edit-button"
-            onClick={() => setIsEditing(true)}
-          >
-            Edit
-          </button>
-        </>
-      )}
-
-      {isShown && (
-        <>
-          <p className="color-card-highlight">Really delete?</p>
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => setIsShown(false)}
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="final-delete-button"
-            onClick={() => onDeleteColor(id)}
-          >
-            Delete
-          </button>
-        </>
-      )}
+      {(() => {
+        switch (mode) {
+          case "edit":
+            return (
+              <>
+                <ColorForm onSubmit={handleUpdate} initialData={color} />
+                <button
+                  type="button"
+                  onClick={() => (onUpdateColor(id), setMode("view"))}
+                >
+                  Cancel
+                </button>
+              </>
+            );
+          // thought i needed the break but the return does the same job here
+          case "delete":
+            return (
+              <>
+                <p className="color-card-highlight">Really delete?</p>
+                <button type="button" onClick={() => setMode("view")}>
+                  Cancel
+                </button>
+                <button type="button" onClick={() => onDeleteColor(id)}>
+                  Delete
+                </button>
+              </>
+            );
+          default:
+            return (
+              <>
+                <button type="button" onClick={() => setMode("delete")}>
+                  Delete
+                </button>
+                <button type="button" onClick={() => setMode("edit")}>
+                  Edit
+                </button>
+              </>
+            );
+        }
+      })()}
     </div>
   );
 }
-
-/* 
-What happens:
-- click on edit button:
-                    > other buttons disappear
-                    > new form shows up role, hex, contrast color inputs + 'update color' button
-- click on update button:
-                    > info is saved and reflected in the theme
-*/
-
-/* 
-****** Acceptance Criteria
-- Each color card has an "Edit" button.
-- Clicking the "Edit" button allows me to modify the role, hex value, and contrast text via a form.
-- The updated color information is reflected in the theme upon submission.
-
-****** Tasks
-- Introduce a state for the edit
-- Reuse the ColorForm Component and display it within the Color Component when in edit mode */

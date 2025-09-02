@@ -22,12 +22,12 @@ export default function ColorForm({ onAddColor }) {
       />
       <label htmlFor="hex">
         Hex
-        <ColorInput name="hex" defaultColor="#5b70cf" />
+        <ColorInput name="hex"/*  defaultColor="#5b70cf" */ /> 
       </label>
 
       <label htmlFor="contrastText">
         Contrast Text
-        <ColorInput name="contrastText" defaultColor="#ffffff" />
+        <ColorInput name="contrastText" /* defaultColor="#ffffff" */ />
       </label>
 
       <button type="submit" className="add-color-button">
