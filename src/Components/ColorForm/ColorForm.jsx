@@ -29,7 +29,7 @@ export default function ColorForm({ onAddColor }) {
       <input type="text" name="role" placeholder="secondary dark" />
       <label htmlFor="hex">
         Hex
-        <ColorInput /* name="hex" */ />
+        <ColorInput name="hex" value={} />
       </label>
       {/* 
         - name of input must match htmlFor, either pass it as a prop or put inside label
@@ -38,7 +38,7 @@ export default function ColorForm({ onAddColor }) {
 
       <label htmlFor="contrast">
         Contrast Text
-        <ColorInput /* name="contrast" */ />
+        <ColorInput name="contrast" value={} />
       </label>
 
       <button type="submit">Add Color</button>
