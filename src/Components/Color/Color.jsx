@@ -1,5 +1,17 @@
 import "./Color.css";
 
+/*
+*****Acceptance Criteria
+- Each color card displayed in the theme includes a "Delete" button for easy removal.
+- Clicking the "Delete" button should show a confirmation message before actually deleting
+- If there are no colors left in the theme after deletion, display a message encouraging users to add new colors.
+
+****Tasks
+  Implement a function to handle the deletion of a color.
+- Introduce a state to handle the confirmation message
+- Reuse the .color-card-headline css rule for the confirm question, but maybe rename it to .color-card-hightlight
+*/
+
 export default function Color({ color, id, onDeleteColor }) {
   return (
     <div
