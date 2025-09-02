@@ -1,0 +1,13 @@
+.form {
+  margin: 15px 10px;
+  padding: 5px;
+  width: 23vw;
+  display: flex;
+  flex-direction: column;
+}
+.color-inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 5px;
+}
