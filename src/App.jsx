@@ -7,14 +7,12 @@ import { uid } from "uid";
 
 function App() {
   const [colors, setColors] = useState(initialColors);
-  console.log("my colors: ", colors.length);
 
   function handleAddColor(newColor) {
     setColors([{ id: uid(), ...newColor }, ...colors]);
   }
 
   function handleDeleteColor(deleteId) {
-    /* console.log("Deleted Id here: ", deleteId); */
     setColors(colors.filter((color) => color.id != deleteId));
   }
 
