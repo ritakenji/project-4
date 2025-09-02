@@ -24,11 +24,19 @@ export default function Color({ color, id, onDeleteColor }) {
 
       {!isShown && (
         <>
-          <button type="button" onClick={handleDeleteConfirm}>
+          <button
+            type="button"
+            className="first-delete-button"
+            onClick={handleDeleteConfirm}
+          >
             Delete
           </button>
 
-          <button type="button" onClick={() => setIsEditing(true)}>
+          <button
+            type="button"
+            className="edit-button"
+            onClick={() => setIsEditing(true)}
+          >
             Edit
           </button>
         </>
@@ -37,10 +45,18 @@ export default function Color({ color, id, onDeleteColor }) {
       {isShown && (
         <>
           <p className="color-card-highlight">Really delete?</p>
-          <button type="button" onClick={() => setIsShown(false)}>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => setIsShown(false)}
+          >
             Cancel
           </button>
-          <button type="button" onClick={() => onDeleteColor(id)}>
+          <button
+            type="button"
+            className="final-delete-button"
+            onClick={() => onDeleteColor(id)}
+          >
             Delete
           </button>
         </>
