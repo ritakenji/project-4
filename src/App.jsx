@@ -18,6 +18,10 @@ function App() {
     setColors(colors.filter((color) => color.id != deleteId));
   }
 
+  function handleEditColor() {
+    
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
@@ -31,6 +35,7 @@ function App() {
             id={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onEditColor={handleEditColor}
           />
         );
       })}

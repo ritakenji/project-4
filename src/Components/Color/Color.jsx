@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Color.css";
-export default function Color({ color, id, onDeleteColor }) {
+export default function Color({ color, id, onDeleteColor, onEditColor }) {
   const [isShown, setIsShown] = useState(false);
 
   function handleDeleteConfirm() {
@@ -20,9 +20,12 @@ export default function Color({ color, id, onDeleteColor }) {
       <p>contrast: {color.contrastText}</p>
 
       {!isShown && (
+        <>
         <button type="button" onClick={handleDeleteConfirm}>
           Delete
         </button>
+        <button type="button" onClick={() => onEditColor}>Edit</button>
+        </>
       )}
 
       {isShown && (
