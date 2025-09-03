@@ -17,7 +17,7 @@ import "./Color.css";
  */
 
 export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
-  const [mode, setMode] = useState("view");
+  const [mode, setMode] = useState("default");
   const [isCopied, setIsCopied] = useState(false);
 
   async function handleClipboard(text) {
@@ -46,7 +46,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
       <h3 className="color-card-highlight" id="hex">
         {color.hex}
       </h3>
-      {mode === "view" && (
+      {mode === "default" && (
         <>
           <button
             type="button"
@@ -71,10 +71,10 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
             buttonName={"Update Color"}
             onAddColor={(data) => {
               onUpdateColor(data, id);
-              setMode("view");
+              setMode("default");
             }}
           />
-          <button type="button" onClick={() => setMode("view")}>
+          <button type="button" onClick={() => setMode("default")}>
             Cancel
           </button>
         </>
@@ -83,7 +83,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
       {mode === "delete" && (
         <>
           <p className="color-card-highlight">Really delete?</p>
-          <button type="button" onClick={() => setMode("view")}>
+          <button type="button" onClick={() => setMode("default")}>
             Cancel
           </button>
           <button type="button" onClick={() => onDeleteColor(id)}>
@@ -92,7 +92,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
         </>
       )}
 
-      {mode === "view" && (
+      {mode === "default" && (
         <>
           <button type="button" onClick={() => setMode("delete")}>
             Delete
