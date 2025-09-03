@@ -4,9 +4,20 @@ import "./App.css";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import { useState } from "react";
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
+
+/* 
+********** Acceptance Criteria
+- The theme is saved to localStorage upon any addition, deletion, or edit of a color.
+- Upon reloading the application, the theme is retrieved and displayed from localStorage.
+
+********* Tasks
+- Install use-local-storage-state package from npm npm i use-local-storage-state and use it */
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("colors", {
+    defaultValue: initialColors,
+  });
 
   function handleAddColor(newColor) {
     setColors([{ id: uid(), ...newColor }, ...colors]);
