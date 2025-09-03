@@ -4,25 +4,24 @@ import "./Color.css";
 
 /* 
 **** Acceptance Criteria
-- A "Copy to Clipboard" button is available.
+- A "Copy to Clipboard" button is available. ✅ 
 - Clicking the button copies the hex code to the clipboard.
 - A confirmation message appears indicating that the color has been copied successfully.
 - Confirmation message disappears after 3 seconds
 
 **** Tasks
-- Create a CopyToClipboard component
+- Create a CopyToClipboard component ✅ 
 - Use navigator.clipboard.writeText() API to copy the hex code to the clipboard ( Note that it is async )
 - Introduce a state that handles the confirmation message
 - Utilize useEffect to set a 3 second timeout to reset the state
  */
 
-export default function Color({
-  color,
-  id,
-  onDeleteColor,
-  onUpdateColor,
-}) {
+export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   const [mode, setMode] = useState("view");
+
+  async function handleClipboard(text) {
+    await navigator.clipboard.writeText(text);
+  }
 
   return (
     <div
@@ -32,8 +31,17 @@ export default function Color({
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card-highlight">{color.hex}</h3>
-      <button type="button"></button>
+      <h3 className="color-card-highlight" id="hex">
+        {color.hex}
+      </h3>
+      <button
+        type="button"
+        data-copy="#hex"
+        onClick={() => handleClipboard(color.hex)}
+      >
+        Copy
+      </button>
+
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
