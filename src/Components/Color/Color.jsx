@@ -26,12 +26,13 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   }
 
   useEffect(() => {
-    let intervalID = setInterval(isCopied, 3000);
-    const clear = function () {
-      clearInterval(intervalID);
-    };
+    if (isCopied === true) {
+      let timeoutID = setTimeout(() => {
+        setIsCopied(false);
+      }, 3000);
 
-    return clear;
+      return () => clearTimeout(timeoutID);
+    }
   }, [isCopied]);
 
   return (
@@ -45,13 +46,20 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
       <h3 className="color-card-highlight" id="hex">
         {color.hex}
       </h3>
-      <button
-        type="button"
-        data-copy="#hex"
-        onClick={() => handleClipboard(color.hex)}
-      >
-        Copy
-      </button>
+      {mode === "view" && (
+        <>
+          <button
+            type="button"
+            data-copy="#hex"
+            onClick={() => {
+              handleClipboard(color.hex);
+            }}
+          >
+            Copy
+          </button>
+        </>
+      )}
+      {isCopied === true && <p>Successfully copied!</p>}
 
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
