@@ -55,11 +55,10 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
               handleClipboard(color.hex);
             }}
           >
-            Copy
+            {isCopied === false ? "Copy" : "Successfully copied!"}
           </button>
         </>
       )}
-      {isCopied === true && <p>Successfully copied!</p>}
 
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
