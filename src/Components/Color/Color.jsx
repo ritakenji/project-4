@@ -21,12 +21,15 @@ What happens:
 - Introduce a state for the edit ✅ 
 - Reuse the ColorForm Component and display it within the Color Component when in edit mode ✅  */
 
-export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
-  const [mode, setMode] = useState("default"); //default aka view/show
-
-  /*  const handleUpdate = (updatedColor) => {
-    onUpdateColor(updatedColor); //in theory i understand im almost there, in practice i feel so far away
-  }; */
+export default function Color({
+  color,
+  id,
+  onDeleteColor,
+  onUpdateColor,
+  updatedColor,
+}) {
+  const [mode, setMode] = useState("default"); //default works as view/show
+  /* I was using isShown && but decided to use switch instead */
 
   return (
     <div
@@ -47,7 +50,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
               <>
                 <ColorForm
                   defaultValue={color}
-                  onSubmit={() => onUpdateColor(id, color)}
+                  onSubmit={() => onUpdateColor(id, color, updatedColor)}
                 />
                 <button type="button" onClick={() => setMode("default")}>
                   Cancel

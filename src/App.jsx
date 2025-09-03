@@ -17,17 +17,21 @@ function App() {
     console.log("deleteId is: ", deletedId);
   }
 
-  /* function handleUpdateColor(updatedColor, id, color) {
-    setColors(colors.map((updatedColor)=>{
-      return(
-        UpdatedColor
-      )
-    });) */
-    
-    //new variable canotiajing what maps is gonna return
+  function handleUpdateColor(updatedColor, id, color) {
+    setColors(
+      colors.map((color) => {
+        if (color.id === id) {
+          return updatedColor;
+        } else {
+          return color;
+        }
+      })
+    );
+
+    //ToDo:
+    //new variable containing what maps is gonna return
     //pass var to setcolors
-    //pass id and color ( onUpdateColor(id, color))
-   /*  setColors(colors.filter((color) => color.id !== updatedColorId)); *///change here map color by id thenn update
+    //pass id and color ( onUpdateColor(id, color))???
   }
 
   return (
