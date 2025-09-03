@@ -24,10 +24,9 @@ What happens:
 export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   const [mode, setMode] = useState("default"); //default aka view/show
 
-  const handleUpdate = (updatedColor) => {
-    onUpdateColor(id, updatedColor); //in theory i understand im almost there, in practice i feel so far away
-    setMode("view");
-  };
+  /*  const handleUpdate = (updatedColor) => {
+    onUpdateColor(updatedColor); //in theory i understand im almost there, in practice i feel so far away
+  }; */
 
   return (
     <div
@@ -46,7 +45,10 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
           case "edit":
             return (
               <>
-                <ColorForm onSubmit={handleUpdate} />
+                <ColorForm
+                  defaultValue={color}
+                  onSubmit={() => onUpdateColor(id, color)}
+                />
                 <button type="button" onClick={() => setMode("default")}>
                   Cancel
                 </button>

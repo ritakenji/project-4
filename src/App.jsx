@@ -13,13 +13,21 @@ function App() {
   }
 
   function handleDeleteColor(deletedId) {
-    setColors(colors.filter((color) => color.id != deletedId));
+    setColors(colors.filter((color) => color.id !== deletedId));
     console.log("deleteId is: ", deletedId);
   }
 
-  function handleUpdateColor(updatedColor) {
-    setColors(colors.filter((color) => color.id != updatedColor));
-    console.log("updatedColor is: ", updatedColor); //<-- problem hint: this is only happening on submit
+  /* function handleUpdateColor(updatedColor, id, color) {
+    setColors(colors.map((updatedColor)=>{
+      return(
+        UpdatedColor
+      )
+    });) */
+    
+    //new variable canotiajing what maps is gonna return
+    //pass var to setcolors
+    //pass id and color ( onUpdateColor(id, color))
+   /*  setColors(colors.filter((color) => color.id !== updatedColorId)); *///change here map color by id thenn update
   }
 
   return (

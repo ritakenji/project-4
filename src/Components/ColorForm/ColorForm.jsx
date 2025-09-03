@@ -1,7 +1,14 @@
 import "./ColorForm.css";
 import { ColorInput } from "./ColorInput";
 
-export default function ColorForm({ onAddColor }) {
+export default function ColorForm({
+  onAddColor,
+  defaultValue = {
+    hex: "#5b70cf",
+    role: "",
+    contrastText: "#ffffff",
+  },
+}) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -18,19 +25,19 @@ export default function ColorForm({ onAddColor }) {
         type="text"
         name="role"
         placeholder="secondary dark"
+        defaultValue={defaultValue.role}
         required
       />
       <label htmlFor="hex">
         Hex
-        <ColorInput
-          name="hex" /*  defaultColor="#5b70cf" <---- removed this because value needs to match color on edit too, how? idk */
-        />
+        <ColorInput name="hex" defaultColor={defaultValue.hex} />
       </label>
 
       <label htmlFor="contrastText">
         Contrast Text
         <ColorInput
-          name="contrastText" /* defaultColor="#ffffff"  <---- removed this because value needs to match color on edit too, how? idk */
+          name="contrastText"
+          defaultColor={defaultValue.contrastText}
         />
       </label>
 
