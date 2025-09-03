@@ -17,18 +17,11 @@ function App() {
   }
 
   function handleUpdateColor(updatedColor, id) {
-    console.log("updatedcolor: ", updatedColor);
     const newArr = colors.map((color) =>
       color.id === id ? { id, ...updatedColor } : color
     );
 
-    console.log("newAr: ", newArr);
     setColors(newArr);
-
-    //ToDo:
-    //new variable containing what maps is gonna return
-    //pass var to setcolors
-    //pass id and color ( onUpdateColor(id, color))??
   }
 
   return (
