@@ -2,23 +2,32 @@ import { useEffect, useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 
-/* 
-**** Acceptance Criteria
-- A "Copy to Clipboard" button is available. ✅ 
-- Clicking the button copies the hex code to the clipboard.
-- A confirmation message appears indicating that the color has been copied successfully.
-- Confirmation message disappears after 3 seconds
-
-**** Tasks
-- Create a CopyToClipboard component ✅ 
-- Use navigator.clipboard.writeText() API to copy the hex code to the clipboard ( Note that it is async )✅
-- Introduce a state that handles the confirmation message
-- Utilize useEffect to set a 3 second timeout to reset the state
- */
-
 export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   const [mode, setMode] = useState("default");
   const [isCopied, setIsCopied] = useState(false);
+  const [result, setResult] = useState({});
+
+  useEffect(() => {
+    async function postFetch() {
+      try {
+        const response = await fetch(
+          `https://www.aremycolorsaccessible.com/api/are-they`,
+          {
+            method: "POST",
+            body: JSON.stringify({ color: [color.hex, color.contrast] }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        setResult(data);
+      } catch (error) {
+        console.error("Error fetching contrast score:", error);
+      }
+    }
+    postFetch();
+  }, [color]);
 
   async function handleClipboard(text) {
     await navigator.clipboard.writeText(text);
@@ -62,6 +71,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
 
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      <p>Overall Contrast Score: {result.score}</p>
 
       {mode === "edit" && (
         <>
