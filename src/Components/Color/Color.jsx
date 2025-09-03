@@ -22,7 +22,7 @@ What happens:
 - Reuse the ColorForm Component and display it within the Color Component when in edit mode ✅  */
 
 export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
-  const [mode, setMode] = useState("view");
+  const [mode, setMode] = useState("default"); //default aka view/show
 
   const handleUpdate = (updatedColor) => {
     onUpdateColor(id, updatedColor); //in theory i understand im almost there, in practice i feel so far away
@@ -47,10 +47,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
             return (
               <>
                 <ColorForm onSubmit={handleUpdate} />
-                <button
-                  type="button"
-                  onClick={() => (onUpdateColor(id), setMode("view"))}
-                >
+                <button type="button" onClick={() => setMode("default")}>
                   Cancel
                 </button>
               </>
@@ -60,7 +57,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
             return (
               <>
                 <p className="color-card-highlight">Really delete?</p>
-                <button type="button" onClick={() => setMode("view")}>
+                <button type="button" onClick={() => setMode("default")}>
                   Cancel
                 </button>
                 <button type="button" onClick={() => onDeleteColor(id)}>
