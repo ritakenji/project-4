@@ -21,15 +21,8 @@ What happens:
 - Introduce a state for the edit ✅ 
 - Reuse the ColorForm Component and display it within the Color Component when in edit mode ✅  */
 
-export default function Color({
-  color,
-  id,
-  onDeleteColor,
-  onUpdateColor,
-  updatedColor,
-}) {
-  const [mode, setMode] = useState("default"); //default works as view/show
-  /* I was using isShown && but decided to use switch instead */
+export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
+  const [mode, setMode] = useState("view");
 
   return (
     <div
@@ -43,46 +36,44 @@ export default function Color({
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      {(() => {
-        switch (mode) {
-          case "edit":
-            return (
-              <>
-                <ColorForm
-                  defaultValue={color}
-                  onSubmit={() => onUpdateColor(id, color, updatedColor)}
-                />
-                <button type="button" onClick={() => setMode("default")}>
-                  Cancel
-                </button>
-              </>
-            );
-          // thought i needed the break but the return does the same job here
-          case "delete":
-            return (
-              <>
-                <p className="color-card-highlight">Really delete?</p>
-                <button type="button" onClick={() => setMode("default")}>
-                  Cancel
-                </button>
-                <button type="button" onClick={() => onDeleteColor(id)}>
-                  Delete
-                </button>
-              </>
-            );
-          default:
-            return (
-              <>
-                <button type="button" onClick={() => setMode("delete")}>
-                  Delete
-                </button>
-                <button type="button" onClick={() => setMode("edit")}>
-                  Edit
-                </button>
-              </>
-            );
-        }
-      })()}
+      {mode === "edit" && (
+        <>
+          <ColorForm
+            defaultValue={color}
+            buttonName={"Update Color"}
+            onAddColor={(data) => {
+              onUpdateColor(data, id);
+              setMode("view");
+            }}
+          />
+          <button type="button" onClick={() => setMode("view")}>
+            Cancel
+          </button>
+        </>
+      )}
+
+      {mode === "delete" && (
+        <>
+          <p className="color-card-highlight">Really delete?</p>
+          <button type="button" onClick={() => setMode("view")}>
+            Cancel
+          </button>
+          <button type="button" onClick={() => onDeleteColor(id)}>
+            Delete
+          </button>
+        </>
+      )}
+
+      {mode === "view" && (
+        <>
+          <button type="button" onClick={() => setMode("delete")}>
+            Delete
+          </button>
+          <button type="button" onClick={() => setMode("edit")}>
+            Edit
+          </button>
+        </>
+      )}
     </div>
   );
 }

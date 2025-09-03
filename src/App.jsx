@@ -14,31 +14,32 @@ function App() {
 
   function handleDeleteColor(deletedId) {
     setColors(colors.filter((color) => color.id !== deletedId));
-    console.log("deleteId is: ", deletedId);
   }
 
-  function handleUpdateColor(updatedColor, id, color) {
-    setColors(
-      colors.map((color) => {
-        if (color.id === id) {
-          return updatedColor;
-        } else {
-          return color;
-        }
-      })
+  function handleUpdateColor(updatedColor, id) {
+    console.log("updatedcolor: ", updatedColor);
+    const newArr = colors.map((color) =>
+      color.id === id ? { id, ...updatedColor } : color
     );
+
+    console.log("newAr: ", newArr);
+    setColors(newArr);
 
     //ToDo:
     //new variable containing what maps is gonna return
     //pass var to setcolors
-    //pass id and color ( onUpdateColor(id, color))???
+    //pass id and color ( onUpdateColor(id, color))??
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
 
-      <ColorForm onAddColor={handleAddColor} />
+      <ColorForm
+        onAddColor={handleAddColor}
+        onUpdateColor={handleUpdateColor}
+        buttonName={"Add Color"}
+      />
 
       {colors.map((color) => {
         return (

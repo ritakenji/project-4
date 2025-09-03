@@ -8,6 +8,7 @@ export default function ColorForm({
     role: "",
     contrastText: "#ffffff",
   },
+  buttonName,
 }) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,7 +43,7 @@ export default function ColorForm({
       </label>
 
       <button type="submit" className="add-color-button">
-        Add Color
+        {buttonName}
       </button>
     </form>
   );
