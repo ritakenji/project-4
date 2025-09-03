@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 
@@ -11,17 +11,28 @@ import "./Color.css";
 
 **** Tasks
 - Create a CopyToClipboard component ✅ 
-- Use navigator.clipboard.writeText() API to copy the hex code to the clipboard ( Note that it is async )
+- Use navigator.clipboard.writeText() API to copy the hex code to the clipboard ( Note that it is async )✅
 - Introduce a state that handles the confirmation message
 - Utilize useEffect to set a 3 second timeout to reset the state
  */
 
 export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
   const [mode, setMode] = useState("view");
+  const [isCopied, setIsCopied] = useState(false);
 
   async function handleClipboard(text) {
     await navigator.clipboard.writeText(text);
+    setIsCopied(true);
   }
+
+  useEffect(() => {
+    let intervalID = setInterval(isCopied, 3000);
+    const clear = function () {
+      clearInterval(intervalID);
+    };
+
+    return clear;
+  }, [isCopied]);
 
   return (
     <div
