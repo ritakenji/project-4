@@ -6,22 +6,17 @@ export function ColorInput({ name, defaultColor }) {
 
   function handleChange(event) {
     //an event where something changes
+    console.log("event.target.value: ", event.target.value);
     setInputValue(event.target.value); //what changes
   }
   return (
     <div className="color-inputs">
-      <input
-        type="text"
-        id={name}
-        name={name}
-        defaultValue={inputValue}
-        placeholder={defaultColor}
-      />
+      <input type="text" id={name} name={name} value={inputValue} />
       <input
         type="color"
-        name={name}
+        /* name={name} */
         onChange={handleChange}
-        defaultValue={defaultColor}
+        value={inputValue}
       />
       {/* where the change happens ^^^ */}
     </div>

@@ -1,11 +1,9 @@
 import { useState } from "react";
+import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
-export default function Color({ color, id, onDeleteColor }) {
-  const [isShown, setIsShown] = useState(false);
 
-  function handleDeleteConfirm() {
-    setIsShown(true);
-  }
+export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
+  const [mode, setMode] = useState("view");
 
   return (
     <div
@@ -15,20 +13,30 @@ export default function Color({ color, id, onDeleteColor }) {
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{color.hex}</h3>
+      <h3 className="color-card-highlight">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      {!isShown && (
-        <button type="button" onClick={handleDeleteConfirm}>
-          Delete
-        </button>
+      {mode === "edit" && (
+        <>
+          <ColorForm
+            defaultValue={color}
+            buttonName={"Update Color"}
+            onAddColor={(data) => {
+              onUpdateColor(data, id);
+              setMode("view");
+            }}
+          />
+          <button type="button" onClick={() => setMode("view")}>
+            Cancel
+          </button>
+        </>
       )}
 
-      {isShown && (
+      {mode === "delete" && (
         <>
           <p className="color-card-highlight">Really delete?</p>
-          <button type="button" onClick={() => setIsShown(false)}>
+          <button type="button" onClick={() => setMode("view")}>
             Cancel
           </button>
           <button type="button" onClick={() => onDeleteColor(id)}>
@@ -36,19 +44,17 @@ export default function Color({ color, id, onDeleteColor }) {
           </button>
         </>
       )}
+
+      {mode === "view" && (
+        <>
+          <button type="button" onClick={() => setMode("delete")}>
+            Delete
+          </button>
+          <button type="button" onClick={() => setMode("edit")}>
+            Edit
+          </button>
+        </>
+      )}
     </div>
   );
 }
-
-/* 
-What must happen: 
-I click the delete button ---> 1 <p> w message + cancel button pop up  AND  delete button moved to to right 
-
-How I get there:
-- 1st button onclick triggers onConfirmDelete
-- onConfirmDelete --> show 3 elements: 
-                              - message ---> <p className="delete-message">Really delete?</p>
-                              - cancel button ---> <button type="button" className="cancel-button" onClick={() =>}>Cancel</button>
-                              - delete button ---> <button type="button" onClick={() => onDeleteColor(id)}>
--
-*/

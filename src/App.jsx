@@ -7,22 +7,32 @@ import { uid } from "uid";
 
 function App() {
   const [colors, setColors] = useState(initialColors);
-  console.log("my colors: ", colors.length);
 
   function handleAddColor(newColor) {
     setColors([{ id: uid(), ...newColor }, ...colors]);
   }
 
-  function handleDeleteColor(deleteId) {
-    /* console.log("Deleted Id here: ", deleteId); */
-    setColors(colors.filter((color) => color.id != deleteId));
+  function handleDeleteColor(deletedId) {
+    setColors(colors.filter((color) => color.id !== deletedId));
+  }
+
+  function handleUpdateColor(updatedColor, id) {
+    const newArr = colors.map((color) =>
+      color.id === id ? { id, ...updatedColor } : color
+    );
+
+    setColors(newArr);
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
 
-      <ColorForm onAddColor={handleAddColor} />
+      <ColorForm
+        onAddColor={handleAddColor}
+        onUpdateColor={handleUpdateColor}
+        buttonName={"Add Color"}
+      />
 
       {colors.map((color) => {
         return (
@@ -31,6 +41,7 @@ function App() {
             id={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onUpdateColor={handleUpdateColor}
           />
         );
       })}
