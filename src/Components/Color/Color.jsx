@@ -55,7 +55,7 @@ export default function Color({ color, id, onDeleteColor, onUpdateColor }) {
             defaultValue={color}
             buttonName={"Update Color"}
             onAddColor={(data) => {
-              onUpdateColor(data, id);
+              onUpdateColor(data, id); //...data, id is the correct way. < CORRECT THIS >
               setMode("default");
             }}
           />

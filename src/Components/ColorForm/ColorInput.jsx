@@ -6,7 +6,6 @@ export function ColorInput({ name, defaultColor }) {
 
   function handleChange(event) {
     //an event where something changes
-    console.log("event.target.value: ", event.target.value);
     setInputValue(event.target.value); //what changes
   }
   return (
